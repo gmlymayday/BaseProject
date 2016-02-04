@@ -2,14 +2,18 @@ package com.young.lee.baseandroid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 
 public abstract class BaseActivity extends Activity {
-	// 是否允许全屏
+	/** 是否沉浸状态栏 **/
+	private boolean isSetStatusBar = true;
+	/** 是否允许全屏 **/
 	private boolean mAllowFullScreen = true;
 	/** 当前Activity渲染的视图View **/
 	private View mContextView = null;
@@ -26,15 +30,31 @@ public abstract class BaseActivity extends Activity {
 		if (null == mView) {
 			mContextView = LayoutInflater.from(this)
 					.inflate(bindLayout(), null);
-		} else {
+		} else
 			mContextView = mView;
-		}
 		if (mAllowFullScreen) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
+		if (isSetStatusBar) {
+			steepStatusBar();
 		}
 		setContentView(mContextView);
 		initView(mContextView);
 		doBusiness(this);
+	}
+
+	/**
+	 * [沉浸状态栏]
+	 */
+	private void steepStatusBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			// 透明状态栏
+			getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			// 透明导航栏
+			getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+		}
 	}
 
 	/**
@@ -114,11 +134,20 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 是否允许全屏
+	 * [是否允许全屏]
 	 * 
 	 * @param allowFullScreen
 	 */
 	public void setAllowFullScreen(boolean allowFullScreen) {
 		this.mAllowFullScreen = allowFullScreen;
+	}
+
+	/**
+	 * [是否设置沉浸状态栏]
+	 * 
+	 * @param allowFullScreen
+	 */
+	public void setSteepStatusBar(boolean isSetStatusBar) {
+		this.isSetStatusBar = isSetStatusBar;
 	}
 }

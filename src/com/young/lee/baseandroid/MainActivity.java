@@ -5,13 +5,16 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.young.lee.util.CustomRequest;
+import com.young.lee.util.DateUtils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
 public class MainActivity extends BaseActivity {
 	private TextView tv;
 
@@ -49,17 +52,19 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void doBusiness(Context mContext) {
 		tv.setText("111");
+		Log.i("Test", DateUtils.getSimpleLunarCalendar("2016-01-17").getDateString());
 		String url = "http://www.weather.com.cn/data/cityinfo/101120501.html";
-		CustomRequest customRequest=new CustomRequest(Method.GET, url, new Listener<String>() {
+		CustomRequest customRequest = new CustomRequest(Method.GET, url,
+				new Listener<String>() {
 
-			@Override
-			public void onResponse(String arg0) {
-			}
-		}, new ErrorListener() {
+					@Override
+					public void onResponse(String arg0) {
+					}
+				}, new ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError arg0) {
-			}
-		});
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+					}
+				});
 	}
 }
