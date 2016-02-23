@@ -36,9 +36,14 @@ import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class Utils {
 	private static final String TAG = "AppUtils";
+
 	private Utils() {
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}
@@ -574,7 +579,7 @@ public class Utils {
 	}
 
 	/**
-	 * [判断手机号码的合法�?]
+	 * [判断手机号码的合法]
 	 * 
 	 * @param mobiles
 	 * @return
@@ -588,7 +593,7 @@ public class Utils {
 	}
 
 	/**
-	 * [判断邮箱的合法�?]
+	 * [判断邮箱的合法]
 	 * 
 	 * @param email
 	 * @return
@@ -622,5 +627,27 @@ public class Utils {
 			}
 		}
 		return Html.fromHtml(result);
+	}
+
+	/**
+	 * [动态计算ListView的高度]
+	 * 
+	 * @param listView
+	 */
+	public void setListViewHeightBasedOnChildren(ListView listView) {
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			return;
+		}
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		listView.setLayoutParams(params);
 	}
 }
