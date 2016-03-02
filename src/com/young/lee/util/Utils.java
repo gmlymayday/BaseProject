@@ -40,6 +40,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class Utils {
 	private static final String TAG = "AppUtils";
@@ -649,5 +650,25 @@ public class Utils {
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
+	}
+
+	/**
+	 * 关键字变色
+	 * 
+	 * @param holder
+	 * @param name
+	 */
+	public void keywordsRed(TextView tv, String title, String keywords) {
+		if (title != null && title.contains(keywords)) {
+			int index = title.indexOf(keywords);
+			int len = keywords.length();
+			Spanned temp = Html.fromHtml(title.substring(0, index)
+					+ "<font color=#9BCCFD>"
+					+ title.substring(index, index + len) + "</font>"
+					+ title.substring(index + len, title.length()));
+			tv.setText(temp);
+		} else {
+			tv.setText(title);
+		}
 	}
 }
