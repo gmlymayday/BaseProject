@@ -3,7 +3,7 @@ package com.young.lee.util;
 import android.util.Log;
 
 /**
- * Log统一管理�?
+ * Log统一管理
  * 
  */
 public class LUtils {
@@ -35,7 +35,7 @@ public class LUtils {
 		v(TAG, msg);
 	}
 
-	// 下面是传入自定义tag的函�?
+	// 下面是传入自定义tag的函�?
 	public static void i(String tag, String msg) {
 		if (isDebug)
 			partLog(msg, PRINT_LOG_I);

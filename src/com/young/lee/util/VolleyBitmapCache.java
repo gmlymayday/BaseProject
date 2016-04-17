@@ -16,7 +16,6 @@ public class VolleyBitmapCache implements ImageCache {
 			protected int sizeOf(String key, Bitmap value) {
 				return value.getRowBytes() * value.getHeight();
 			}
-
 		};
 	}
 
@@ -29,5 +28,4 @@ public class VolleyBitmapCache implements ImageCache {
 	public void putBitmap(String url, Bitmap bitmap) {
 		mCache.put(url, bitmap);
 	}
-
 }

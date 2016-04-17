@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,8 @@ import android.widget.TextView;
 
 public class Utils {
 	private static final String TAG = "AppUtils";
+	public static final String USER_NAME = "user_name";
+	public static final String USER_PWD = "user_pwd";
 
 	private Utils() {
 		throw new UnsupportedOperationException("cannot be instantiated");
