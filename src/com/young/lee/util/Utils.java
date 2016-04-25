@@ -7,8 +7,19 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -47,6 +58,9 @@ public class Utils {
 	private static final String TAG = "AppUtils";
 	public static final String USER_NAME = "user_name";
 	public static final String USER_PWD = "user_pwd";
+	public static final String email_username = "";
+	public static final String email_pwd = "";
+	public static final String CRASH_TEST = "crash-test.log";
 
 	private Utils() {
 		throw new UnsupportedOperationException("cannot be instantiated");
@@ -592,7 +606,6 @@ public class Utils {
 		Pattern p = Pattern
 				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 		Matcher m = p.matcher(mobiles);
-		System.out.println(m.matches() + "---");
 		return m.matches();
 	}
 
@@ -673,5 +686,112 @@ public class Utils {
 		} else {
 			tv.setText(title);
 		}
+	}
+
+	/**
+	 * [发送邮箱]
+	 */
+	public static void sendEmail(final String content) {
+		new Thread() {
+			public void run() {
+				try {
+					Properties prop = new Properties();
+					prop.put("mail.transport.protocol", "smtp");
+					prop.put("mail.smtp.auth", "true");// 设置要验证
+					prop.put("mail.host", "smtp.163.com");// 设置host
+					prop.put("mail.smtp.port", "25"); // 设置端口
+					// 使用JavaMail发送邮件的5个步骤
+					// 1、创建session
+					Session session = Session.getInstance(prop);
+					// 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
+					session.setDebug(true);
+					// 2、通过session得到transport对象
+					Transport ts = session.getTransport();
+					// 3、连上邮件服务器
+					ts.connect("smtp.163.com", Utils.email_username,
+							Utils.email_pwd);
+					// 4、创建邮件
+					// Message message = createAttachMail(session);
+					Message message = createSimpleMail(session, content);
+					// 5、发送邮件
+					ts.sendMessage(message, message.getAllRecipients());
+					ts.close();
+					android.os.Process.killProcess(android.os.Process.myPid());
+					System.exit(10);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			};
+		}.start();
+	}
+
+	/**
+	 * [只包含文本的邮件]
+	 * 
+	 * @param session
+	 * @param content
+	 * @return
+	 */
+	public static MimeMessage createSimpleMail(Session session, String content) {
+		try {
+			// 创建邮件对象
+			MimeMessage message = new MimeMessage(session);
+			// 指明邮件的发件人
+			message.setFrom(new InternetAddress(Utils.email_username));
+			// 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+					Utils.email_username));
+			// 邮件的标题
+			message.setSubject("bugs");
+			// 邮件的文本内容
+			message.setContent(content, "text/html;charset=UTF-8");
+			// 返回创建好的邮件对象
+			return message;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * [带附件的邮件]
+	 * 
+	 * @param context
+	 * @param session
+	 * @return
+	 */
+	public static MimeMessage createAttachMail(Session session) {
+		try {
+			MimeMessage message = new MimeMessage(session);
+			// 发件人
+			message.setFrom(new InternetAddress(Utils.email_username));
+			// 收件人
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+					Utils.email_username));
+			// 邮件标题
+			message.setSubject("bugs");
+			// 创建邮件正文，为了避免邮件正文中文乱码问题，需要使用charset=UTF-8指明字符编码
+			MimeBodyPart text = new MimeBodyPart();
+			text.setContent("使用JavaMail创建的带附件的邮件", "text/html;charset=UTF-8");
+			// 创建邮件附件
+			MimeBodyPart attach = new MimeBodyPart();
+			File file = new File(Environment.getExternalStorageDirectory(),
+					Utils.CRASH_TEST);
+			DataHandler dh = new DataHandler(new FileDataSource(file));
+			attach.setDataHandler(dh);
+			attach.setFileName(dh.getName()); //
+			// 创建容器描述数据关系
+			MimeMultipart mp = new MimeMultipart();
+			mp.addBodyPart(text);
+			mp.addBodyPart(attach);
+			mp.setSubType("mixed");
+			message.setContent(mp);
+			// message.saveChanges();
+			// message.writeTo(new FileOutputStream("attachMail.eml"));
+			return message;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

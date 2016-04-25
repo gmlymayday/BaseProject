@@ -12,6 +12,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.young.lee.util.CustomRequest;
 import com.young.lee.util.DateUtils;
+import com.young.lee.util.Utils;
 
 public class MainActivity extends BaseActivity {
 	private TextView tv;
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
+		tv = (TextView) findViewById(R.id.tv);
+		tv.setOnClickListener(this);
 		tv = (TextView) findViewById(R.id.tv);
 	}
 
@@ -57,6 +60,12 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void widgetClick(View v) {
-		
+		switch (v.getId()) {
+		case R.id.tv:
+			Utils.sendEmail("1222");
+			break;
+		default:
+			break;
+		}
 	}
 }

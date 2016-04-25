@@ -6,9 +6,10 @@ import android.content.Context;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.young.lee.util.CrashHandler;
 import com.young.lee.util.VolleyBitmapCache;
 
-public abstract class MApplication extends Application {
+public class MApplication extends Application {
 	private ImageLoader mImageLoader;
 	private RequestQueue mRequestQueue;
 	/** 对外提供整个应用生命周期的Context **/
@@ -25,6 +26,8 @@ public abstract class MApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		CrashHandler crashHandler = CrashHandler.getInstance();
+		crashHandler.init(getApplicationContext());
 		mRequestQueue = Volley.newRequestQueue(getBaseContext());
 		mImageLoader = new ImageLoader(mRequestQueue, new VolleyBitmapCache());
 	}
