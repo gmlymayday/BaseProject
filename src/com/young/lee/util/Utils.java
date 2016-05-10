@@ -2,6 +2,7 @@ package com.young.lee.util;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -793,5 +794,28 @@ public class Utils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * [获取状态栏的高度]
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static int getHeight(Context context) {
+		Class<?> c = null;
+		Object obj = null;
+		Field field = null;
+		int x = 0;
+		try {
+			c = Class.forName("com.android.internal.R$dimen");
+			obj = c.newInstance();
+			field = c.getField("status_bar_height");
+			x = Integer.parseInt(field.get(obj).toString());
+			return context.getResources().getDimensionPixelSize(x);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

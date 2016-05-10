@@ -22,10 +22,12 @@ public class MApplication extends Application {
 	public static String deviceId = "error";
 	/** 日志输出标志 **/
 	protected final String TAG = this.getClass().getSimpleName();
+	private static Context context;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		context = getApplicationContext();
 		CrashHandler crashHandler = CrashHandler.getInstance();
 		crashHandler.init(getApplicationContext());
 		mRequestQueue = Volley.newRequestQueue(getBaseContext());
@@ -33,7 +35,7 @@ public class MApplication extends Application {
 	}
 
 	/**
-	 * 图片加载
+	 * [图片加载]
 	 * 
 	 * @return
 	 */
@@ -42,11 +44,20 @@ public class MApplication extends Application {
 	}
 
 	/**
-	 * 消息队列
+	 * [消息队列]
 	 * 
 	 * @return
 	 */
 	public RequestQueue getRequestQueue() {
 		return mRequestQueue;
+	}
+
+	/**
+	 * [全局的Context]
+	 * 
+	 * @return
+	 */
+	public static Context getContext() {
+		return context;
 	}
 }
