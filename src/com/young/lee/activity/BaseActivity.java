@@ -17,9 +17,9 @@ import android.widget.Toast;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
 	/** 是否沉浸状态栏 **/
-	private boolean isSetStatusBar = true;
+	private boolean isSetStatusBar = false;
 	/** 是否允许全屏 **/
-	private boolean mAllowFullScreen = true;
+	private boolean mAllowFullScreen = false;
 	/** 是否禁止旋转屏幕 **/
 	private boolean isAllowScreenRoate = false;
 	/** 返回键退出 **/
@@ -78,6 +78,11 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	 * @param parms
 	 */
 	public abstract void initParms(Bundle parms);
+
+	@SuppressWarnings("unchecked")
+	public <T extends View> T $(int resId) {
+		return (T) super.findViewById(resId);
+	}
 
 	/**
 	 * [绑定视图]

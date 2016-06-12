@@ -34,9 +34,8 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
-		tv = (TextView) findViewById(R.id.tv);
+		tv = $(R.id.tv);
 		tv.setOnClickListener(this);
-		tv = (TextView) findViewById(R.id.tv);
 		marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
 		List<String> info = new ArrayList<String>();
 		info.add("1. 大家好，我是孙福生。");
@@ -76,7 +75,6 @@ public class MainActivity extends BaseActivity {
 	public void widgetClick(View v) {
 		switch (v.getId()) {
 		case R.id.tv:
-			Utils.sendEmail("1222");
 			break;
 		default:
 			break;
