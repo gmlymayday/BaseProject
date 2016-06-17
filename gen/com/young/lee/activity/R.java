@@ -13,6 +13,16 @@ public final class R {
         public static final int anim_marquee_out=0x7f040001;
     }
     public static final class attr {
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int maxZoom=0x7f010005;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be an integer value, such as "<code>100</code>".
@@ -36,6 +46,11 @@ Available units are: px (pixels), dp (density-independent pixels), sp (scaled pi
 in (inches), mm (millimeters).
          */
         public static final int mvTextSize=0x7f010002;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be an integer value, such as "<code>100</code>".
+         */
+        public static final int zoomId=0x7f010004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -50,12 +65,14 @@ in (inches), mm (millimeters).
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int tv_bg=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
-        public static final int marqueeView=0x7f090001;
-        public static final int tv=0x7f090000;
-        public static final int tv_2=0x7f090002;
+        public static final int action_settings=0x7f090004;
+        public static final int dynamic_tag=0x7f090001;
+        public static final int iv_zoom=0x7f090002;
+        public static final int marqueeView=0x7f090000;
+        public static final int tv_2=0x7f090003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -166,5 +183,47 @@ in (inches), mm (millimeters).
           @attr name com.young.lee.activity:mvTextSize
         */
         public static final int MarqueeViewStyle_mvTextSize = 2;
+        /** Attributes that can be used with a ObservableScrollView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ObservableScrollView_maxZoom com.young.lee.activity:maxZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #ObservableScrollView_zoomId com.young.lee.activity:zoomId}</code></td><td></td></tr>
+           </table>
+           @see #ObservableScrollView_maxZoom
+           @see #ObservableScrollView_zoomId
+         */
+        public static final int[] ObservableScrollView = {
+            0x7f010004, 0x7f010005
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#maxZoom}
+          attribute's value can be found in the {@link #ObservableScrollView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.young.lee.activity:maxZoom
+        */
+        public static final int ObservableScrollView_maxZoom = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#zoomId}
+          attribute's value can be found in the {@link #ObservableScrollView} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be an integer value, such as "<code>100</code>".
+          @attr name com.young.lee.activity:zoomId
+        */
+        public static final int ObservableScrollView_zoomId = 0;
     };
 }

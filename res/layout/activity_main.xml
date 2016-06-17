@@ -5,21 +5,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="10dp"
-        android:text="@string/hello_world" />
-
     <com.young.lee.view.MarqueeView
         android:id="@+id/marqueeView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:background="#000000"
         app:mvAnimDuration="1000"
-        app:mvInterval="3000"
+        app:mvInterval="2000"
         app:mvTextColor="#ffffff"
         app:mvTextSize="14sp" />
+
+    <com.young.lee.view.FlowLayout
+        android:id="@+id/dynamic_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeffff" />
+
+    <com.young.lee.view.ZoomScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:maxZoom="400dp"
+        app:zoomId="@+id/iv_zoom" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1500dp"
+            android:minHeight="1500dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_zoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+    </com.young.lee.view.ZoomScrollView>
 
 </LinearLayout>

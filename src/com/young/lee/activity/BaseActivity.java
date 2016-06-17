@@ -1,5 +1,6 @@
 package com.young.lee.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -7,30 +8,24 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 public abstract class BaseActivity extends Activity implements OnClickListener {
 	/** 是否沉浸状态栏 **/
 	private boolean isSetStatusBar = false;
 	/** 是否允许全屏 **/
 	private boolean mAllowFullScreen = false;
 	/** 是否禁止旋转屏幕 **/
-	private boolean isAllowScreenRoate = false;
-	/** 返回键退出 **/
-	private boolean isBackExit = false;
+	private boolean isAllowScreenRoate = true;
 	/** 当前Activity渲染的视图View **/
 	private View mContextView = null;
 	/** 日志输出标志 **/
 	protected final String TAG = this.getClass().getSimpleName();
-
-	/** View点击 **/
-	public abstract void widgetClick(View v);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +33,8 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		Log.d(TAG, "BaseActivity-->onCreate()");
 		Bundle bundle = getIntent().getExtras();
 		initParms(bundle);
-		View mView = bindView();
-		if (null == mView) {
-			mContextView = LayoutInflater.from(this)
-					.inflate(bindLayout(), null);
-		} else
-			mContextView = mView;
+		mContextView = LayoutInflater.from(this).inflate(bindLayout(), null);
+		setActivityStyle();
 		if (mAllowFullScreen) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
@@ -73,23 +64,11 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * [初始化参数]
+	 * [初始化Bundle参数]
 	 * 
 	 * @param parms
 	 */
 	public abstract void initParms(Bundle parms);
-
-	@SuppressWarnings("unchecked")
-	public <T extends View> T $(int resId) {
-		return (T) super.findViewById(resId);
-	}
-
-	/**
-	 * [绑定视图]
-	 * 
-	 * @return
-	 */
-	public abstract View bindView();
 
 	/**
 	 * [绑定布局]
@@ -99,16 +78,16 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	public abstract int bindLayout();
 
 	/**
+	 * [重写： 1.是否沉浸状态栏 2.是否全屏 3.是否禁止旋转屏幕]
+	 */
+	public abstract void setActivityStyle();
+
+	/**
 	 * [初始化控件]
 	 * 
 	 * @param view
 	 */
 	public abstract void initView(final View view);
-
-	@Override
-	public void onClick(View v) {
-		widgetClick(v);
-	}
 
 	/**
 	 * [业务操作]
@@ -120,6 +99,14 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	public View getView(View v, int id) {
 		v.findViewById(id);
 		return v;
+	}
+
+	/** View点击 **/
+	public abstract void widgetClick(View v);
+
+	@Override
+	public void onClick(View v) {
+		widgetClick(v);
 	}
 
 	/**
@@ -224,34 +211,5 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	 */
 	public void setScreenRoate(boolean isAllowScreenRoate) {
 		this.isAllowScreenRoate = isAllowScreenRoate;
-	}
-
-	/**
-	 * [是否连续两次返回退出]
-	 * 
-	 * @param allowFullScreen
-	 */
-	public void setBackExit(boolean isBackExit) {
-		this.isBackExit = isBackExit;
-	}
-
-	private long exitTime;
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-			if (isBackExit) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(), "再按一次退出程序",
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					System.exit(0);
-				}
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 }

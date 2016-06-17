@@ -5,27 +5,18 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.young.lee.util.CustomRequest;
-import com.young.lee.util.DateUtils;
-import com.young.lee.util.Utils;
+import com.young.lee.view.FlowLayout;
+import com.young.lee.view.FlowLayout.OnTagItemClickListener;
 import com.young.lee.view.MarqueeView;
 
 public class MainActivity extends BaseActivity {
-	private TextView tv;
 	private MarqueeView marqueeView;
-
-	@Override
-	public View bindView() {
-		return null;
-	}
+	private List<String> info;
+	private FlowLayout flowlayout;
 
 	@Override
 	public int bindLayout() {
@@ -34,17 +25,9 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
-		tv = $(R.id.tv);
-		tv.setOnClickListener(this);
 		marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
-		List<String> info = new ArrayList<String>();
-		info.add("1. 大家好，我是孙福生。");
-		info.add("2. 欢迎大家关注我哦！");
-		info.add("3. GitHub帐号：sfsheng0322");
-		info.add("4. 新浪微博：孙福生微博");
-		info.add("5. 个人博客：sunfusheng.com");
-		info.add("6. 微信公众号：孙福生");
-		marqueeView.startWithList(info);
+		flowlayout = (FlowLayout) findViewById(R.id.dynamic_tag);
+
 	}
 
 	@Override
@@ -52,32 +35,50 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	public void setActivityStyle() {
+	}
+
+	@Override
 	public void doBusiness(Context mContext) {
-		tv.setText("111");
-		Log.i("Test", DateUtils.getSimpleLunarCalendar("2016-01-17")
-				.getDateString());
-		String url = "http://www.weather.com.cn/data/cityinfo/101120501.html";
-		CustomRequest customRequest = new CustomRequest(Method.GET, url,
-				new Listener<String>() {
-
+		info = new ArrayList<String>();
+		info.add("JavaScript");
+		info.add("CSS3");
+		info.add("Html5");
+		info.add("AngularJS");
+		info.add("Node.js");
+		info.add("Bootstrap");
+		info.add("HTML/CSS");
+		info.add("WebApp");
+		info.add("PHP");
+		info.add("JAVA");
+		info.add("Linux");
+		info.add("Python");
+		info.add("C");
+		info.add("C++");
+		marqueeView.startWithList(info);
+		marqueeView
+				.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 					@Override
-					public void onResponse(String arg0) {
-					}
-				}, new ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError arg0) {
+					public void onItemClick(int position, TextView textView) {
+						Toast.makeText(getApplicationContext(),
+								textView.getText() + "", Toast.LENGTH_SHORT)
+								.show();
 					}
 				});
+		// ---------------------
+		flowlayout.setOnTagItemClickListener(new OnTagItemClickListener() {
+
+			@Override
+			public void onClick(TextView tv) {
+				Toast.makeText(MainActivity.this, tv.getText().toString(),
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+		flowlayout.setTags(info);
 	}
 
 	@Override
 	public void widgetClick(View v) {
-		switch (v.getId()) {
-		case R.id.tv:
-			break;
-		default:
-			break;
-		}
 	}
+
 }

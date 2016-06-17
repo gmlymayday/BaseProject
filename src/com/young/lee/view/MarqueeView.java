@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,6 +26,7 @@ public class MarqueeView extends ViewFlipper {
 	private Context mContext;
 	private List<String> notices;
 	private boolean isSetAnimDuration = false;
+	private OnItemClickListener onItemClickListener;
 
 	private int interval = 2000;
 	private int animDuration = 500;
@@ -124,8 +126,18 @@ public class MarqueeView extends ViewFlipper {
 		if (notices == null || notices.size() == 0)
 			return false;
 		removeAllViews();
-		for (String notice : notices) {
-			addView(createTextView(notice));
+		for (int i = 0; i < notices.size(); i++) {
+			final TextView textView = createTextView(notices.get(i), i);
+			final int finalI = i;
+			textView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (onItemClickListener != null) {
+						onItemClickListener.onItemClick(finalI, textView);
+					}
+				}
+			});
+			addView(textView);
 		}
 		if (notices.size() > 1) {
 			startFlipping();
@@ -134,13 +146,18 @@ public class MarqueeView extends ViewFlipper {
 	}
 
 	// 创建ViewFlipper下的TextView
-	private TextView createTextView(String text) {
+	private TextView createTextView(String text, int position) {
 		TextView tv = new TextView(mContext);
 		tv.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		tv.setText(text);
 		tv.setTextColor(textColor);
 		tv.setTextSize(textSize);
+		tv.setTag(position);
 		return tv;
+	}
+
+	public int getPosition() {
+		return (Integer) getCurrentView().getTag();
 	}
 
 	public List<String> getNotices() {
@@ -149,6 +166,14 @@ public class MarqueeView extends ViewFlipper {
 
 	public void setNotices(List<String> notices) {
 		this.notices = notices;
+	}
+
+	public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+		this.onItemClickListener = onItemClickListener;
+	}
+
+	public interface OnItemClickListener {
+		void onItemClick(int position, TextView textView);
 	}
 
 }

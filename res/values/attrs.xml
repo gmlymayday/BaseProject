@@ -7,5 +7,8 @@
         <attr name="mvTextSize" format="dimension|reference" />
         <attr name="mvTextColor" format="color|reference" />
     </declare-styleable>
-
+<declare-styleable name="ObservableScrollView">
+        <attr name="zoomId" format="reference|integer" />
+        <attr name="maxZoom" format="dimension" />
+    </declare-styleable>
 </resources>
