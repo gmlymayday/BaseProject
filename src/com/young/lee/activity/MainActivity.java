@@ -25,6 +25,7 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
+		setSwipeBackEnable(false);
 		marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
 		flowlayout = (FlowLayout) findViewById(R.id.dynamic_tag);
 
@@ -60,9 +61,9 @@ public class MainActivity extends BaseActivity {
 				.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 					@Override
 					public void onItemClick(int position, TextView textView) {
-						Toast.makeText(getApplicationContext(),
-								textView.getText() + "", Toast.LENGTH_SHORT)
-								.show();
+						Bundle bundel = new Bundle();
+						bundel.putString("tag", textView.getText().toString());
+						startActivity(SecondActivity.class, bundel);
 					}
 				});
 		// ---------------------

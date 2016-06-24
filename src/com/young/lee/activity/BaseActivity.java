@@ -1,7 +1,7 @@
 package com.young.lee.activity;
 
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,7 +15,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public abstract class BaseActivity extends Activity implements OnClickListener {
+public abstract class BaseActivity extends SwipeBackActivity implements
+		OnClickListener {
 	/** 是否沉浸状态栏 **/
 	private boolean isSetStatusBar = false;
 	/** 是否允许全屏 **/
@@ -29,15 +30,15 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if (mAllowFullScreen) {
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
 		super.onCreate(savedInstanceState);
 		Log.d(TAG, "BaseActivity-->onCreate()");
 		Bundle bundle = getIntent().getExtras();
 		initParms(bundle);
 		mContextView = LayoutInflater.from(this).inflate(bindLayout(), null);
 		setActivityStyle();
-		if (mAllowFullScreen) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-		}
 		if (isSetStatusBar) {
 			steepStatusBar();
 		}
@@ -88,6 +89,11 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	 * @param view
 	 */
 	public abstract void initView(final View view);
+
+	@SuppressWarnings("unchecked")
+	public <T extends View> T $(int resId) {
+		return (T) super.findViewById(resId);
+	}
 
 	/**
 	 * [业务操作]

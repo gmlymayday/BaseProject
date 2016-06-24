@@ -1,8 +1,6 @@
 package com.young.lee.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,15 +15,8 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
 	public abstract void widgetClick(View v);
 
 	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-		Log.d(TAG, "BaseFragment-->onAttach()");
-	}
-
-	@Override
-	@Nullable
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		Log.d(TAG, "BaseFragment-->onCreateView()");
 		View view = LayoutInflater.from(getActivity()).inflate(bindLayout(),
 				null);

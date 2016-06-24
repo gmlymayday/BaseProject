@@ -34,13 +34,11 @@ public class FlowLayout extends ViewGroup {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		Log.d(TAG, "onMeasure1");
+		Log.d(TAG, "onMeasure");
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-		Log.d(TAG, widthMode + ";" + heightMode + ";" + widthSize + ";"
-				+ heightSize);
 		// 当前ViewGroup的总高度
 		int totalHeight = 0;
 		// 所有行中的最大宽度
@@ -53,8 +51,12 @@ public class FlowLayout extends ViewGroup {
 		int childViewWidthSpace = 0;
 		// 每个childView所占用的高度
 		int childViewHeightSpace = 0;
+		int lines = 0;
 		int count = getChildCount();
 		MarginLayoutParams layoutParams;
+		if (count > 0) {
+			lines = 1;
+		}
 		for (int i = 0; i < count; i++) {
 			View child = getChildAt(i);
 			if (child.getVisibility() != View.GONE) {// 只有当这个View能够显示的时候才去测量
@@ -66,7 +68,8 @@ public class FlowLayout extends ViewGroup {
 				childViewHeightSpace = child.getMeasuredHeight()
 						+ layoutParams.topMargin + layoutParams.bottomMargin;
 				if (currentLineWidth + childViewWidthSpace > widthSize) {// 表示如果当前行再加上现在这个子View，就会超出总的规定宽度，需要另起一行
-					totalHeight += lineMaxHeight;
+				// totalHeight += lineMaxHeight;
+					lines++;
 					if (maxLineWidth < currentLineWidth) {// 如果行的最长宽度发生了变化，更新保存的最长宽度
 						maxLineWidth = currentLineWidth;
 					}
@@ -80,14 +83,16 @@ public class FlowLayout extends ViewGroup {
 				}
 			}
 		}
+		totalHeight = lines * childViewHeightSpace;
 		setMeasuredDimension(widthMode == MeasureSpec.EXACTLY ? widthSize
 				: maxLineWidth, heightMode == MeasureSpec.EXACTLY ? heightSize
 				: totalHeight);
-		Log.d(TAG, "onMeasure2");
+		// setMeasuredDimension(widthSize, heightSize);
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		Log.d(TAG, "onLayout");
 		// 当前是第几行
 		int currentLine = 1;
 		// 存放每一行的最大高度
@@ -156,7 +161,7 @@ public class FlowLayout extends ViewGroup {
 	}
 
 	public void setTags(List<String> tags) {
-		Log.d(TAG, "setTags1");
+		Log.d(TAG, "setTags");
 		if (tags != null) {
 			mTags.clear();
 			mTags.addAll(tags);
@@ -166,8 +171,6 @@ public class FlowLayout extends ViewGroup {
 						MarginLayoutParams.WRAP_CONTENT,
 						MarginLayoutParams.WRAP_CONTENT);
 				lp.setMargins(10, 10, 10, 10);
-				// lp.width = MarginLayoutParams.WRAP_CONTENT;
-				// lp.height = MarginLayoutParams.WRAP_CONTENT;
 				tv.setLayoutParams(lp);
 				tv.setBackgroundResource(R.drawable.tv_bg);
 				/*
@@ -192,7 +195,6 @@ public class FlowLayout extends ViewGroup {
 			}
 			requestLayout();
 		}
-		Log.d(TAG, "setTags2");
 	}
 
 	private OnTagItemClickListener listener;

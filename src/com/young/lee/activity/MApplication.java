@@ -12,8 +12,6 @@ import com.young.lee.util.VolleyBitmapCache;
 public class MApplication extends Application {
 	private ImageLoader mImageLoader;
 	private RequestQueue mRequestQueue;
-	/** 对外提供整个应用生命周期的Context **/
-	private static Context instance;
 	/** 渠道ID **/
 	public static String channelId = "Ajava";
 	/** 应用程序版本versionName **/
@@ -23,6 +21,7 @@ public class MApplication extends Application {
 	/** 日志输出标志 **/
 	protected final String TAG = this.getClass().getSimpleName();
 	private static Context context;
+	private static Context instance;
 
 	@Override
 	public void onCreate() {

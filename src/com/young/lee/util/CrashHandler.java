@@ -18,7 +18,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 */
 	private Thread.UncaughtExceptionHandler mDefaultHandler;
 	private static CrashHandler INSTANCE;
-	private static final boolean isCreateFile = false;// 是否创建错误文件
+	private static final boolean isCreateFile = true;// 是否创建错误文件
 
 	private CrashHandler() {
 	}

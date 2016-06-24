@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.young.lee.baseandroid.SecondActivity" >
+    tools:context="com.young.lee.activity.SecondActivity" >
 
     <item
         android:id="@+id/action_settings"
