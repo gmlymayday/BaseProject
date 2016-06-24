@@ -54,6 +54,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Utils {
 	private static final String TAG = "AppUtils";
@@ -62,6 +63,7 @@ public class Utils {
 	public static final String email_username = "";
 	public static final String email_pwd = "";
 	public static final String CRASH_TEST = "crash-test.log";
+	private static Toast toast;
 
 	private Utils() {
 		throw new UnsupportedOperationException("cannot be instantiated");
@@ -817,5 +819,37 @@ public class Utils {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	/**
+	 * 显示Toast
+	 * 
+	 * @param context
+	 * @param message
+	 */
+	public static void showToast(Context context, int message) {
+		if (toast == null) {
+			toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+		} else {
+			toast.setText(message);
+			toast.setDuration(Toast.LENGTH_SHORT);
+		}
+		toast.show();
+	}
+
+	/**
+	 * [显示Toast]
+	 * 
+	 * @param context
+	 * @param message
+	 */
+	public static void showToast(Context context, String message) {
+		if (toast == null) {
+			toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+		} else {
+			toast.setText(message);
+			toast.setDuration(Toast.LENGTH_SHORT);
+		}
+		toast.show();
 	}
 }

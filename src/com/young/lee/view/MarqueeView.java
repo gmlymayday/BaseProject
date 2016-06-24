@@ -127,17 +127,17 @@ public class MarqueeView extends ViewFlipper {
 			return false;
 		removeAllViews();
 		for (int i = 0; i < notices.size(); i++) {
-			final TextView textView = createTextView(notices.get(i), i);
+			final TextView tv = createTextView(notices.get(i), i);
 			final int finalI = i;
-			textView.setOnClickListener(new OnClickListener() {
+			tv.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (onItemClickListener != null) {
-						onItemClickListener.onItemClick(finalI, textView);
+						onItemClickListener.onItemClick(finalI, tv);
 					}
 				}
 			});
-			addView(textView);
+			addView(tv);
 		}
 		if (notices.size() > 1) {
 			startFlipping();

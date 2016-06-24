@@ -32,6 +32,10 @@
             android:name=".SecondActivity"
             android:label="@string/title_activity_second" >
         </activity>
+        <activity
+            android:name=".TagDetailActivity"
+            android:label="@string/title_activity_tag_detail" >
+        </activity>
     </application>
 
 </manifest>
