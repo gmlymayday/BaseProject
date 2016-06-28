@@ -21,6 +21,16 @@ public final class R {
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int SwipeBackLayoutStyle=0x7f01000b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int bottomMarginTop=0x7f01002b;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -252,6 +262,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         	able to scroll while refreshing, and behaves better. It acheives this by adding
         	Header and/or Footer Views to the ListView.
 
+
+
+
         
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -292,6 +305,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         	Whether the Drawable should be continually rotated as you pull. This only
         	takes effect when using the 'Rotate' Animation Style.
 
+
+
+
         
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -315,6 +331,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int ptrSubHeaderTextAppearance=0x7f010023;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int roundColor=0x7f01002d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int roundProgressColor=0x7f01002e;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -327,6 +361,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int shadow_right=0x7f010009;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int yOffsetStep=0x7f01002c;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be an integer value, such as "<code>100</code>".
@@ -334,6 +378,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int zoomId=0x7f010004;
     }
     public static final class color {
+        public static final int colorAccent=0x7f050003;
+        public static final int colorPrimary=0x7f050001;
+        public static final int colorPrimaryDark=0x7f050002;
         public static final int transparent=0x7f050000;
     }
     public static final class dimen {
@@ -346,6 +393,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
+        public static final int fab_margin=0x7f060007;
         public static final int header_footer_left_right_padding=0x7f060005;
         public static final int header_footer_top_bottom_padding=0x7f060006;
         public static final int indicator_corner_radius=0x7f060003;
@@ -353,62 +401,91 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int indicator_right_padding=0x7f060002;
     }
     public static final class drawable {
-        public static final int default_ptr_flip=0x7f020000;
-        public static final int default_ptr_rotate=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int indicator_arrow=0x7f020003;
-        public static final int indicator_bg_bottom=0x7f020004;
-        public static final int indicator_bg_top=0x7f020005;
-        public static final int shadow_bottom=0x7f020006;
-        public static final int shadow_left=0x7f020007;
-        public static final int shadow_right=0x7f020008;
-        public static final int tv_bg=0x7f020009;
+        public static final int back_shape=0x7f020000;
+        public static final int card_left1=0x7f020001;
+        public static final int card_left2=0x7f020002;
+        public static final int card_photot=0x7f020003;
+        public static final int default_ptr_flip=0x7f020004;
+        public static final int default_ptr_rotate=0x7f020005;
+        public static final int home_button=0x7f020006;
+        public static final int home_normal=0x7f020007;
+        public static final int home_pressed=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ignore_button=0x7f02000a;
+        public static final int ignore_normal=0x7f02000b;
+        public static final int ignore_pressed=0x7f02000c;
+        public static final int indicator_arrow=0x7f02000d;
+        public static final int indicator_bg_bottom=0x7f02000e;
+        public static final int indicator_bg_top=0x7f02000f;
+        public static final int like_button=0x7f020010;
+        public static final int like_normal=0x7f020011;
+        public static final int like_pressed=0x7f020012;
+        public static final int shadow_bottom=0x7f020013;
+        public static final int shadow_left=0x7f020014;
+        public static final int shadow_right=0x7f020015;
+        public static final int tv_bg=0x7f020016;
     }
     public static final class id {
-        public static final int action_settings=0x7f07001e;
+        public static final int action_settings=0x7f070029;
         public static final int all=0x7f070003;
         public static final int both=0x7f070007;
         public static final int bottom=0x7f070004;
+        public static final int card_bottom_layout=0x7f070020;
+        public static final int card_image_view=0x7f07001a;
+        public static final int card_left_btn=0x7f070021;
+        public static final int card_like=0x7f07001e;
+        public static final int card_other_description=0x7f07001d;
+        public static final int card_pic_num=0x7f07001b;
+        public static final int card_right_btn=0x7f070022;
+        public static final int card_user_name=0x7f07001c;
+        public static final int container=0x7f070010;
         public static final int disabled=0x7f070008;
-        public static final int dynamic_tag=0x7f070013;
-        public static final int fl_inner=0x7f070018;
+        public static final int dynamic_tag=0x7f070015;
+        public static final int fl_inner=0x7f070023;
         public static final int flip=0x7f07000e;
         public static final int gridview=0x7f070000;
-        public static final int iv_zoom=0x7f070014;
-        public static final int layout_main=0x7f070010;
-        public static final int layout_ripple=0x7f070012;
+        public static final int image_slide_panel=0x7f07001f;
+        public static final int iv_zoom=0x7f070016;
+        public static final int layout_cardview=0x7f070013;
+        public static final int layout_main=0x7f070011;
+        public static final int layout_recyclerView=0x7f070014;
         public static final int left=0x7f070005;
         public static final int manualOnly=0x7f070009;
         public static final int pullDownFromTop=0x7f07000a;
         public static final int pullFromEnd=0x7f07000b;
         public static final int pullFromStart=0x7f07000c;
         public static final int pullUpFromBottom=0x7f07000d;
-        public static final int pull_refresh_scrollview=0x7f070016;
-        public static final int pull_to_refresh_image=0x7f070019;
-        public static final int pull_to_refresh_progress=0x7f07001a;
-        public static final int pull_to_refresh_sub_text=0x7f07001c;
-        public static final int pull_to_refresh_text=0x7f07001b;
+        public static final int pull_refresh_scrollview=0x7f070018;
+        public static final int pull_to_refresh_image=0x7f070024;
+        public static final int pull_to_refresh_progress=0x7f070025;
+        public static final int pull_to_refresh_sub_text=0x7f070027;
+        public static final int pull_to_refresh_text=0x7f070026;
         public static final int right=0x7f070006;
         public static final int rotate=0x7f07000f;
         public static final int scrollview=0x7f070002;
-        public static final int swipe=0x7f07001d;
-        public static final int tv_marqueeView=0x7f070011;
-        public static final int tv_tag_text=0x7f070015;
-        public static final int viewstub_wea=0x7f070017;
+        public static final int swipe=0x7f070028;
+        public static final int tv_marqueeView=0x7f070012;
+        public static final int tv_tag_text=0x7f070017;
+        public static final int viewstub_wea=0x7f070019;
         public static final int webview=0x7f070001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_second=0x7f030001;
-        public static final int activity_tag_detail=0x7f030002;
-        public static final int pull_to_refresh_header_horizontal=0x7f030003;
-        public static final int pull_to_refresh_header_vertical=0x7f030004;
-        public static final int swipeback_layout=0x7f030005;
+        public static final int activity_card=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_second=0x7f030002;
+        public static final int activity_tag_detail=0x7f030003;
+        public static final int card_item=0x7f030004;
+        public static final int card_layout=0x7f030005;
+        public static final int fragment_main=0x7f030006;
+        public static final int pull_to_refresh_header_horizontal=0x7f030007;
+        public static final int pull_to_refresh_header_vertical=0x7f030008;
+        public static final int swipeback_layout=0x7f030009;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
-        public static final int second=0x7f0a0001;
-        public static final int tag_detail=0x7f0a0002;
+        public static final int card=0x7f0a0000;
+        public static final int main=0x7f0a0001;
+        public static final int second=0x7f0a0002;
+        public static final int tag_detail=0x7f0a0003;
     }
     public static final class string {
         public static final int action_settings=0x7f080008;
@@ -425,6 +502,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pull_to_refresh_refreshing_label=0x7f080002;
         public static final int pull_to_refresh_release_label=0x7f080001;
         public static final int refreshing=0x7f08000c;
+        public static final int title_activity_card=0x7f08000e;
         public static final int title_activity_second=0x7f080009;
         public static final int title_activity_tag_detail=0x7f08000a;
     }
@@ -1000,6 +1078,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         	able to scroll while refreshing, and behaves better. It acheives this by adding
         	Header and/or Footer Views to the ListView.
 
+
+
+
         
 
 
@@ -1067,6 +1148,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           
         	Whether the Drawable should be continually rotated as you pull. This only
         	takes effect when using the 'Rotate' Animation Style.
+
+
+
 
         
 
@@ -1203,5 +1287,97 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.young.lee.activity:shadow_right
         */
         public static final int SwipeBackLayout_shadow_right = 3;
+        /** Attributes that can be used with a card.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #card_bottomMarginTop com.young.lee.activity:bottomMarginTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #card_yOffsetStep com.young.lee.activity:yOffsetStep}</code></td><td></td></tr>
+           </table>
+           @see #card_bottomMarginTop
+           @see #card_yOffsetStep
+         */
+        public static final int[] card = {
+            0x7f01002b, 0x7f01002c
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#bottomMarginTop}
+          attribute's value can be found in the {@link #card} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.young.lee.activity:bottomMarginTop
+        */
+        public static final int card_bottomMarginTop = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#yOffsetStep}
+          attribute's value can be found in the {@link #card} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.young.lee.activity:yOffsetStep
+        */
+        public static final int card_yOffsetStep = 1;
+        /** Attributes that can be used with a progress_circle.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #progress_circle_roundColor com.young.lee.activity:roundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #progress_circle_roundProgressColor com.young.lee.activity:roundProgressColor}</code></td><td></td></tr>
+           </table>
+           @see #progress_circle_roundColor
+           @see #progress_circle_roundProgressColor
+         */
+        public static final int[] progress_circle = {
+            0x7f01002d, 0x7f01002e
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#roundColor}
+          attribute's value can be found in the {@link #progress_circle} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.young.lee.activity:roundColor
+        */
+        public static final int progress_circle_roundColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.young.lee.activity.R.attr#roundProgressColor}
+          attribute's value can be found in the {@link #progress_circle} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.young.lee.activity:roundProgressColor
+        */
+        public static final int progress_circle_roundProgressColor = 1;
     };
 }

@@ -18,20 +18,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#33000000" >
+        android:layout_height="wrap_content"
+        android:background="#33000000"
+        android:orientation="vertical" >
 
         <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/layout_ripple"
+            android:id="@+id/layout_cardview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="50dp" >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Button inside a ripple" />
+                android:text="CardView" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/layout_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="RecyclerView" />
         </com.balysv.materialripple.MaterialRippleLayout>
     </LinearLayout>
 

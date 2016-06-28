@@ -43,13 +43,6 @@ public class PasswordEncoder {
 		}
 	}
 
-	/**
-	 * ת���ֽ�����Ϊ16�����ִ�
-	 * 
-	 * @param b
-	 *            �ֽ�����
-	 * @return 16�����ִ�
-	 */
 	private static String byteArrayToHexString(byte[] b) {
 		StringBuffer resultSb = new StringBuffer();
 		for (int i = 0; i < b.length; i++) {
@@ -68,9 +61,7 @@ public class PasswordEncoder {
 	}
 
 	/**
-	 * [����ֵ��MD5����] 
-	 * 1.����ֵ���� <br>
-	 * 2.���ܺ���ַ�����MD5����
+	 * [带盐值的加密]
 	 * 
 	 * @param password
 	 * @param salt

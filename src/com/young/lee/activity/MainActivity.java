@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.young.lee.util.Utils;
 import com.young.lee.view.FlowLayout;
@@ -36,12 +37,30 @@ public class MainActivity extends BaseActivity {
 		flowlayout = (FlowLayout) findViewById(R.id.dynamic_tag);
 		OverScrollDecoratorHelper.setUpStaticOverScroll(layout_main,
 				OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
-		findViewById(R.id.layout_ripple).setOnClickListener(
+		findViewById(R.id.layout_cardview).setOnClickListener(
 				new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						Utils.showToast(MainActivity.this, "show");
+						startActivity(CardActivity.class);
+					}
+				});
+		findViewById(R.id.layout_recyclerView).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// 创建下载任务,downloadUrl就是下载链接
+						String downloadUrl = "http://shouji.360tpcdn.com/160405/bd16978ccf84b88c9328ec03e72445c3/com.shbaiche.hunlianwang_24.apk";
+						DownloadManager.Request request = new DownloadManager.Request(
+								Uri.parse(downloadUrl));
+						// 指定下载路径和下载文件名
+						request.setDestinationInExternalPublicDir("/download/",
+								"1.apk");
+						// 获取下载管理器
+						DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+						// 将下载任务加入下载队列，否则不会进行下载
+						downloadManager.enqueue(request);
 					}
 				});
 
@@ -98,8 +117,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void widgetClick(View v) {
 		switch (v.getId()) {
-		case R.id.layout_ripple:
-			Utils.showToast(this, "show");
+		case R.id.layout_cardview:
 			break;
 		default:
 			break;

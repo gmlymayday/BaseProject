@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -35,6 +35,10 @@
         <activity
             android:name=".TagDetailActivity"
             android:label="@string/title_activity_tag_detail" >
+        </activity>
+        <activity
+            android:name=".CardActivity"
+            android:label="@string/title_activity_card" >
         </activity>
     </application>
 

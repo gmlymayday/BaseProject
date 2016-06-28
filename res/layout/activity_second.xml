@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:background="#cccccc"
+                android:elevation="8dp"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="1313" />

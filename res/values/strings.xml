@@ -9,5 +9,6 @@
     <string name="pull_to_refresh">下拉更新</string>
     <string name="refreshing">正在更新…</string>
     <string name="leave_to_refresh">松手可更新</string>
+    <string name="title_activity_card">CardActivity</string>
 
 </resources>

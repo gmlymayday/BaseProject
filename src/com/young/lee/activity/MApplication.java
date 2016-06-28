@@ -10,7 +10,7 @@ import com.young.lee.util.CrashHandler;
 import com.young.lee.util.VolleyBitmapCache;
 
 public class MApplication extends Application {
-	private ImageLoader mImageLoader;
+	private static ImageLoader mImageLoader;
 	private RequestQueue mRequestQueue;
 	/** 渠道ID **/
 	public static String channelId = "Ajava";
@@ -38,7 +38,7 @@ public class MApplication extends Application {
 	 * 
 	 * @return
 	 */
-	public ImageLoader getImageLoader() {
+	public static ImageLoader getImageLoader() {
 		return mImageLoader;
 	}
 

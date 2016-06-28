@@ -84,12 +84,18 @@ public abstract class BaseActivity extends SwipeBackActivity implements
 	public abstract void setActivityStyle();
 
 	/**
-	 * [初始化控件]
+	 * [初始化布局]
 	 * 
 	 * @param view
 	 */
 	public abstract void initView(final View view);
 
+	/**
+	 * [初始化控件]
+	 * 
+	 * @param resId
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public <T extends View> T $(int resId) {
 		return (T) super.findViewById(resId);
@@ -102,17 +108,13 @@ public abstract class BaseActivity extends SwipeBackActivity implements
 	 */
 	public abstract void doBusiness(Context mContext);
 
-	public View getView(View v, int id) {
-		v.findViewById(id);
-		return v;
-	}
-
 	/** View点击 **/
 	public abstract void widgetClick(View v);
 
 	@Override
 	public void onClick(View v) {
-		widgetClick(v);
+		if (fastClick())
+			widgetClick(v);
 	}
 
 	/**
@@ -217,5 +219,19 @@ public abstract class BaseActivity extends SwipeBackActivity implements
 	 */
 	public void setScreenRoate(boolean isAllowScreenRoate) {
 		this.isAllowScreenRoate = isAllowScreenRoate;
+	}
+
+	/**
+	 * [防止快速点击]
+	 * 
+	 * @return
+	 */
+	private boolean fastClick() {
+		long lastClick = 0;
+		if (System.currentTimeMillis() - lastClick <= 1000) {
+			return false;
+		}
+		lastClick = System.currentTimeMillis();
+		return true;
 	}
 }
