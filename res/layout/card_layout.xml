@@ -6,15 +6,6 @@
     android:background="#fff"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="#cd4827"
-        android:gravity="center"
-        android:text="探索"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >

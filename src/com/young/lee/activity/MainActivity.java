@@ -5,14 +5,28 @@ import java.util.List;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import android.app.DownloadManager;
+import android.app.DownloadManager.Request;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.graphics.Outline;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.young.lee.util.Utils;
 import com.young.lee.view.FlowLayout;
 import com.young.lee.view.FlowLayout.OnTagItemClickListener;
@@ -23,6 +37,14 @@ public class MainActivity extends BaseActivity {
 	private List<String> info;
 	private FlowLayout flowlayout;
 	private LinearLayout layout_main;
+	private DownloadCompleteReceiver receiver;
+	private DownloadManager downloadManager;
+	private DownloadChangeObserver downloadObserver;
+	private long lastDownloadId = 0;
+	private static final Uri CONTENT_URI = Uri
+			.parse("content://downloads/my_downloads");
+	private MaterialRippleLayout layout_cardview;
+	private LinearLayout layout_1;
 
 	@Override
 	public int bindLayout() {
@@ -37,33 +59,114 @@ public class MainActivity extends BaseActivity {
 		flowlayout = (FlowLayout) findViewById(R.id.dynamic_tag);
 		OverScrollDecoratorHelper.setUpStaticOverScroll(layout_main,
 				OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
-		findViewById(R.id.layout_cardview).setOnClickListener(
-				new OnClickListener() {
+		layout_1=(LinearLayout) findViewById(R.id.layout_1);
+		layout_cardview = (MaterialRippleLayout) findViewById(R.id.layout_cardview);
+		layout_cardview.setOnClickListener(new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						startActivity(CardActivity.class);
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				startActivity(CardActivity.class);
+			}
+		});
+		ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+
+			@Override
+			public void getOutline(View view, Outline outline) {
+				outline.setRoundRect(10, 10, view.getWidth() - 10,
+						view.getHeight() - 10, 5);
+			}
+		};
+		layout_cardview.setOutlineProvider(viewOutlineProvider);
+		layout_cardview.setClipToOutline(true);
+		receiver = new DownloadCompleteReceiver();
+		registerReceiver(receiver, new IntentFilter(
+				DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 		findViewById(R.id.layout_recyclerView).setOnClickListener(
 				new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						// 创建下载任务,downloadUrl就是下载链接
-						String downloadUrl = "http://shouji.360tpcdn.com/160405/bd16978ccf84b88c9328ec03e72445c3/com.shbaiche.hunlianwang_24.apk";
+						Utils.showToast(getApplicationContext(), "开始下载");
+						downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+						String downloadUrl = "http://shouji.360tpcdn.com/160623/0ce0968272bb6a6d76bcaa5d7526cf36/com.xingin.xhs_45110.apk";
 						DownloadManager.Request request = new DownloadManager.Request(
 								Uri.parse(downloadUrl));
-						// 指定下载路径和下载文件名
 						request.setDestinationInExternalPublicDir("/download/",
 								"1.apk");
-						// 获取下载管理器
-						DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-						// 将下载任务加入下载队列，否则不会进行下载
-						downloadManager.enqueue(request);
+						request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+						request.setVisibleInDownloadsUi(true);
+						lastDownloadId = downloadManager.enqueue(request);
+						downloadObserver = new DownloadChangeObserver(null);
+						getContentResolver().registerContentObserver(
+								CONTENT_URI, true, downloadObserver);
 					}
 				});
+	}
 
+	class DownloadCompleteReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			queryDownloadStatus();
+		}
+	}
+
+	class DownloadChangeObserver extends ContentObserver {
+		public DownloadChangeObserver(Handler handler) {
+			super(handler);
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			queryDownloadStatus();
+		}
+	}
+
+	private void queryDownloadStatus() {
+		DownloadManager.Query query = new DownloadManager.Query();
+		query.setFilterById(lastDownloadId);
+		Cursor c = downloadManager.query(query);
+		if (c != null && c.moveToFirst()) {
+			int status = c.getInt(c
+					.getColumnIndex(DownloadManager.COLUMN_STATUS));
+
+			int reasonIdx = c.getColumnIndex(DownloadManager.COLUMN_REASON);
+			int titleIdx = c.getColumnIndex(DownloadManager.COLUMN_TITLE);
+			int fileSizeIdx = c
+					.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+			int bytesDLIdx = c
+					.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+			String title = c.getString(titleIdx);
+			int fileSize = c.getInt(fileSizeIdx);
+			int bytesDL = c.getInt(bytesDLIdx);
+
+			// Translate the pause reason to friendly text.
+			int reason = c.getInt(reasonIdx);
+			StringBuilder sb = new StringBuilder();
+			sb.append(title).append("\n");
+			sb.append("Downloaded:").append(bytesDL).append(" / ")
+					.append(fileSize);
+			Log.d("Test", sb.toString() + ";" + status);
+			switch (status) {
+
+			case DownloadManager.STATUS_PENDING:
+				Log.d("Test", "开始下载");
+				break;
+			case DownloadManager.STATUS_RUNNING:
+				Log.d("Test", "下载中");
+				break;
+			case DownloadManager.STATUS_PAUSED:
+				Log.d("Test", "暂停下载");
+				break;
+			case DownloadManager.STATUS_SUCCESSFUL:
+				Log.d("Test", "下载完成");
+				break;
+			case DownloadManager.STATUS_FAILED:
+				Log.d("Test", "下载失败");
+				downloadManager.remove(lastDownloadId);
+				break;
+			}
+		}
 	}
 
 	@Override
@@ -123,5 +226,4 @@ public class MainActivity extends BaseActivity {
 			break;
 		}
 	}
-
 }

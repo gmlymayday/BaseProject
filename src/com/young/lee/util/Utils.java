@@ -532,9 +532,9 @@ public class Utils {
 	 * @return
 	 */
 	public static boolean install(String apkPath, Context context) {
-		if (hasRootPerssion()) {
-			return clientInstall(apkPath);
-		} else {
+//		if (hasRootPerssion()) {
+//			return clientInstall(apkPath);
+//		} else {
 			File file = new File(apkPath);
 			if (!file.exists()) {
 				return false;
@@ -547,7 +547,7 @@ public class Utils {
 					"application/vnd.android.package-archive");
 			context.startActivity(intent);
 			return true;
-		}
+//		}
 	}
 
 	/**
