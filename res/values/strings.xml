@@ -10,5 +10,10 @@
     <string name="refreshing">正在更新…</string>
     <string name="leave_to_refresh">松手可更新</string>
     <string name="title_activity_card">CardActivity</string>
+    <string name="html_text" formatted="false">
+		<![CDATA[
+        <font color=\'#ffbbdd\'>dfdf</font>121212
+        ]]>
+    </string>
 
 </resources>

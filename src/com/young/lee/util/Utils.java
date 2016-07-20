@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -24,7 +25,6 @@ import javax.mail.internet.MimeMultipart;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +36,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
@@ -189,14 +190,14 @@ public class Utils {
 	}
 
 	/**
-	 * [获取SD卡的状�?]
+	 * [获取SD卡的状态]
 	 */
 	public static String getState() {
 		return Environment.getExternalStorageState();
 	}
 
 	/**
-	 * [�?��SDCard是否可用]
+	 * [判断SDCard是否可用]
 	 * 
 	 * @return
 	 */
@@ -233,7 +234,7 @@ public class Utils {
 	}
 
 	/**
-	 * [获取指定路径�?��空间的剩余可用容量字节数，单位byte]
+	 * [获取指定路径空间的剩余可用容量字节数，单位byte]
 	 * 
 	 * @param filePath
 	 * @return
@@ -532,22 +533,22 @@ public class Utils {
 	 * @return
 	 */
 	public static boolean install(String apkPath, Context context) {
-//		if (hasRootPerssion()) {
-//			return clientInstall(apkPath);
-//		} else {
-			File file = new File(apkPath);
-			if (!file.exists()) {
-				return false;
-			}
-			Intent intent = new Intent();
-			intent.setAction("android.intent.action.VIEW");
-			intent.addCategory("android.intent.category.DEFAULT");
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.setDataAndType(Uri.fromFile(file),
-					"application/vnd.android.package-archive");
-			context.startActivity(intent);
-			return true;
-//		}
+		// if (hasRootPerssion()) {
+		// return clientInstall(apkPath);
+		// } else {
+		File file = new File(apkPath);
+		if (!file.exists()) {
+			return false;
+		}
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		intent.addCategory("android.intent.category.DEFAULT");
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.android.package-archive");
+		context.startActivity(intent);
+		return true;
+		// }
 	}
 
 	/**

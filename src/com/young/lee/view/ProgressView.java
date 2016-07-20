@@ -1,7 +1,5 @@
 package com.young.lee.view;
 
-import com.young.lee.activity.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -9,10 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.young.lee.activity.R;
 
 public class ProgressView extends View {
 	private Context context;
@@ -68,7 +67,7 @@ public class ProgressView extends View {
 		paint1.setColor(Color.rgb(251, 240, 225));
 		canvas.drawCircle(centre, centre, radius1, paint1);
 		int radius2 = (int) (centre / 4); // 圆环的半径
-		Paint paint2=new Paint();
+		Paint paint2=new Paint(); 
 		paint2.setColor(Color.rgb(250, 234, 217));
 		canvas.drawCircle(centre, centre, radius2, paint2);
 		TextView tv=new TextView(context);

@@ -13,10 +13,8 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Outline;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.young.lee.util.Utils;
@@ -45,6 +42,11 @@ public class MainActivity extends BaseActivity {
 			.parse("content://downloads/my_downloads");
 	private MaterialRippleLayout layout_cardview;
 	private LinearLayout layout_1;
+	private TextView tv_miaopai;
+
+	@Override
+	public void initParms(Bundle parms) {
+	}
 
 	@Override
 	public int bindLayout() {
@@ -57,9 +59,11 @@ public class MainActivity extends BaseActivity {
 		layout_main = (LinearLayout) findViewById(R.id.layout_main);
 		tv_marqueeView = (MarqueeView) findViewById(R.id.tv_marqueeView);
 		flowlayout = (FlowLayout) findViewById(R.id.dynamic_tag);
+		tv_miaopai = (TextView) findViewById(R.id.tv_miaopai);
+		tv_miaopai.setText(getString(R.string.html_text));
 		OverScrollDecoratorHelper.setUpStaticOverScroll(layout_main,
 				OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
-		layout_1=(LinearLayout) findViewById(R.id.layout_1);
+		layout_1 = (LinearLayout) findViewById(R.id.layout_1);
 		layout_cardview = (MaterialRippleLayout) findViewById(R.id.layout_cardview);
 		layout_cardview.setOnClickListener(new OnClickListener() {
 
@@ -167,10 +171,6 @@ public class MainActivity extends BaseActivity {
 				break;
 			}
 		}
-	}
-
-	@Override
-	public void initParms(Bundle parms) {
 	}
 
 	@Override

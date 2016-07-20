@@ -28,7 +28,9 @@
                 android:text="1313" />
 
             <com.young.lee.view.AvatarImageView
+                android:id="@+id/iv_head"
                 android:layout_width="100dp"
+                android:tint="#33000000"
                 android:layout_height="100dp"
                 android:background="@drawable/shape_rectangle_four"
                 android:src="@drawable/head_a" />
